@@ -9,7 +9,6 @@ namespace Negocio
         public List<Articulo> Listar() 
         {
             List<Articulo> Lista = new List<Articulo>();
-
             AccesoADatos Datos = new AccesoADatos();
             Articulo Articulo;
 
@@ -191,14 +190,13 @@ namespace Negocio
             {
                 datos.SetearConsulta("insert into ARTICULOS values ( @Codigo , @Nombre , @Descripcion , @Idmarca , @IdCategoria , @ImagenURL , @Precio )");
                 datos.comando.Parameters.Clear();
-                datos.comando.Parameters.AddWithValue("@Codigo", articulo.CodArt);
-                datos.comando.Parameters.AddWithValue("@Nombre", articulo.Nombre);
-                datos.comando.Parameters.AddWithValue("@Descripcion", articulo.Descripcion);
-                datos.comando.Parameters.AddWithValue("@IdMarca", articulo.Marca.Id);
-                datos.comando.Parameters.AddWithValue("@IdCategoria", articulo.Categoria.Id);
-                datos.comando.Parameters.AddWithValue("@ImagenURL", articulo.ImagenURL);
-                datos.comando.Parameters.AddWithValue("@Precio", articulo.Precio);
-
+                datos.AgregarParametros("@Codigo", articulo.CodArt);
+                datos.AgregarParametros("@Nombre", articulo.Nombre);
+                datos.AgregarParametros("@Descripcion", articulo.Descripcion);
+                datos.AgregarParametros("@IdMarca", articulo.Marca.Id);
+                datos.AgregarParametros("@IdCategoria", articulo.Categoria.Id);
+                datos.AgregarParametros("@ImagenURL", articulo.ImagenURL);
+                datos.AgregarParametros("@Precio", articulo.Precio);
                 datos.EjecutarAccion();
 
             }
